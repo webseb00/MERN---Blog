@@ -2,6 +2,7 @@ import React from 'react';
 import HtmlBox from '../../common/HtmlBox/HtmlBox';
 import PageTitle from '../../common/PageTitle/PageTitle';
 import { PropTypes } from 'prop-types';
+
 const Post = ({ singlePost }) => (
    
     <div id={singlePost.id}>
