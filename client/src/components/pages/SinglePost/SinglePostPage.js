@@ -1,9 +1,10 @@
 import React from 'react';
+import SinglePostContainer from './SinglePostContainer';
 
-const SinglePostPage = () => (
+const SinglePostPage = props => (
     <div>
-        <h1>Single post page</h1>
+        <SinglePostContainer id={props.match.params.id} />
     </div>
-);
+)
 
 export default SinglePostPage;

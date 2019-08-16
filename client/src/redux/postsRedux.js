@@ -16,6 +16,10 @@ export const endRequest = () => ({ type: END_REQUEST });
 
 export const ERROR_REQUEST = createActionName('ERROR_REQUEST');
 export const errorRequest = error => ({ error, type: ERROR_REQUEST });
+
+export const GET_SINGLE_POST = createActionName('GET_SINGLE_POST');
+export const getSinglePost = payload => ({ payload, type: GET_SINGLE_POST });
+
 // get posts
 export const getPosts = ({ posts }) => posts.data;
 // get number of all posts
@@ -23,13 +27,16 @@ export const getPostsNumber = ({ posts }) => posts.data.length;
 
 export const getRequest = ({ posts }) => posts.request;
 
+export const getPost = ({ posts }) => posts.singlePost; 
+
 const initialState = {
     data: [],
     request: {
         pending: false,
         error: null,
         success: null
-    }
+    },
+    singlePost: {}
 };
 
 export default function reducer(statePart = initialState, action = {}) {
@@ -37,11 +44,13 @@ export default function reducer(statePart = initialState, action = {}) {
         case LOAD_POSTS:
             return { ...statePart, data: action.payload };
         case START_REQUEST:
-            return { ...statePart, request: { pending: true, error: null, success: null }};
+            return { ...statePart, request: { pending: true, error: null, success: null } };
         case END_REQUEST:
-            return { ...statePart, request: { pending: false, error: null, success: true }};
+            return { ...statePart, request: { pending: false, error: null, success: true } };
         case ERROR_REQUEST:
-            return { ...statePart, request: { pending: false, error: action.error, success: false }}
+            return { ...statePart, request: { pending: false, error: action.error, success: false } };
+        case GET_SINGLE_POST:
+            return { ...statePart, singlePost: action.payload };
         default:
             return statePart;
     }
@@ -49,6 +58,7 @@ export default function reducer(statePart = initialState, action = {}) {
 
 // THUNKS:
 
+// get all posts
 export const loadPostsRequest = () => {
     return async dispatch => {
         dispatch(startRequest());
@@ -63,3 +73,18 @@ export const loadPostsRequest = () => {
         
     };
 };
+
+//get single post
+export const loadSinglePostRequest = (id) => {
+    return async dispatch => {
+        dispatch(startRequest());
+        try {
+            let res = await axios.get(`${API_URL}/posts/${id}`);
+            await new Promise((resolve, reject) => setTimeout(resolve, 2000));
+            dispatch(getSinglePost(res.data));
+            dispatch(endRequest());
+        } catch (e) {
+            dispatch(errorRequest(e.message));
+        }
+    }
+}
