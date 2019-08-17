@@ -15,7 +15,7 @@ class SinglePost extends React.Component {
 
     checkData() {
         const { singlePost, request } = this.props;
-
+        console.log(singlePost);
         if ((request.pending === false) &&
             (request.success === true) &&
             (singlePost !== null)) 

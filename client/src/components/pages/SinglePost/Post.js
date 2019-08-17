@@ -9,6 +9,7 @@ const Post = ({ singlePost }) => (
         <article className="post-summary">
             <PageTitle>{singlePost.title}</PageTitle>
             <HtmlBox>{singlePost.content}</HtmlBox>
+            <p>Author: {singlePost.author}</p>
         </article> 
     </div>
 
@@ -17,7 +18,8 @@ const Post = ({ singlePost }) => (
 Post.propTypes = {
     id: PropTypes.string,
     title: PropTypes.string,
-    content: PropTypes.string
+    content: PropTypes.string,
+    author: PropTypes.string
 }
 
 export default Post;
