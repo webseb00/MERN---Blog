@@ -63,6 +63,6 @@ Posts.propTypes = {
       })
     ),
     loadPosts: PropTypes.func.isRequired,
-  };
+};
 
 export default Posts;

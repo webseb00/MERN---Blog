@@ -1,4 +1,5 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 
 import Editor from 'react-medium-editor';
 import 'medium-editor/dist/css/medium-editor.css';
@@ -28,15 +29,25 @@ class PostFormUpdate extends React.Component {
     // get data and inject them to the state
     findPost() {
         const { getPosts, routeId } = this.props;
-        const getSinglePost = getPosts.find(post => post.id === routeId);
-        const { title, author, content } = getSinglePost;
-        this.setState({ 
-            post: {
-                title,
-                author,
-                content
-            }
-         });
+        if(getPosts.length === 0) {
+            this.setState({ 
+                post: {
+                    title: '',
+                    author: '',
+                    content: ''
+                }
+            });
+        } else {
+            const getSinglePost = getPosts.find(post => post.id === routeId); 
+            const { title, author, content } = getSinglePost;
+            this.setState({ 
+                post: {
+                    title,
+                    author,
+                    content
+                }
+            });
+        }
     }
 
     updatePost = (e) => {
