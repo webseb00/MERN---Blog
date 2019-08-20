@@ -17,6 +17,11 @@ const PostSummary = ({ id, title, content, author }) => (
             Read more
             </Button>
         </Link>
+        <Link to={'/posts/' + id + '/edit'}>
+            <Button variant="info">
+                Edit
+            </Button>
+        </Link>
     </article>
 );
 

@@ -9,6 +9,7 @@ import NotFound from './components/pages/NotFound/NotFoundPage';
 
 import SinglePostPage from './components/pages/SinglePost/SinglePostPage';
 import AddPostPage from './components/pages/AddPost/AddPostPage';
+import PostFormUpdatePage from './components/pages/UpdatePost/PostFormUpdatePage';
 
 class App extends React.Component {
     state = {
@@ -31,6 +32,7 @@ class App extends React.Component {
                     <Route path='/posts' exact component={Posts} />
                     <Route path='/posts/new' exact component={AddPostPage} />
                     <Route path='/posts/:id' exact component={SinglePostPage} />  
+                    <Route path='/posts/:id/edit' exact component={PostFormUpdatePage} />
                     <Route path='/contact' exact component={Contact} />
                     <Route component={NotFound} />
                 </Switch>

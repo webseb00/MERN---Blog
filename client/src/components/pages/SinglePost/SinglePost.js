@@ -13,9 +13,14 @@ class SinglePost extends React.Component {
         loadSinglePost(id);
     }
 
+    componentDidUpdate() {
+        const { request } = this.props;
+        request.success = null;
+    }
+
     checkData() {
         const { singlePost, request } = this.props;
-        console.log(singlePost);
+
         if ((request.pending === false) &&
             (request.success === true) &&
             (singlePost !== null)) 

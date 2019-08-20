@@ -10,6 +10,10 @@ class Posts extends React.Component {
         const { loadPosts } = this.props;
         loadPosts();
     }
+    componentDidUpdate() {
+        const { request } = this.props;
+        request.success = null;
+    }
 
     checkData() {
         const { posts, request } = this.props;     
