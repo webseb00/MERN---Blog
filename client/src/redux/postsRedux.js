@@ -20,6 +20,9 @@ export const errorRequest = error => ({ error, type: ERROR_REQUEST });
 export const GET_SINGLE_POST = createActionName('GET_SINGLE_POST');
 export const getSinglePost = payload => ({ payload, type: GET_SINGLE_POST });
 
+export const LOAD_POSTS_PAGE = createActionName('LOAD_POSTS_PAGE');
+export const loadPostsByPage = payload => ({ payload, type: LOAD_POSTS_PAGE });
+
 // get posts
 export const getPosts = ({ posts }) => posts.data;
 // get number of all posts
@@ -29,6 +32,16 @@ export const getRequest = ({ posts }) => posts.request;
 
 export const getPost = ({ posts }) => posts.singlePost; 
 
+export const getPages = ({ posts }) => Math.ceil(posts.amount / posts.postsPerPage);
+
+export const getInitialPage = ({ posts }) => posts.initialPage;
+
+export const getPostsPerPage = ({ posts }) => posts.postsPerPage;
+
+export const getPresentPage = ({ posts }) => posts.presentPage;
+
+export const getPagination = ({ posts }) => posts.pagination;
+
 const initialState = {
     data: [],
     request: {
@@ -36,7 +49,12 @@ const initialState = {
         error: null,
         success: null
     },
-    singlePost: {}
+    singlePost: {},
+    amount: 0,
+    postsPerPage: 2,
+    presentPage: null,
+    initialPage: 1,
+    pagination: true
 };
 
 export default function reducer(statePart = initialState, action = {}) {
@@ -51,6 +69,14 @@ export default function reducer(statePart = initialState, action = {}) {
             return { ...statePart, request: { pending: false, error: action.error, success: false } };
         case GET_SINGLE_POST:
             return { ...statePart, singlePost: action.payload };
+        case LOAD_POSTS_PAGE:
+            return {
+                ...statePart,
+                postsPerPage: action.payload.postsPerPage,
+                presentPage: action.payload.presentPage,
+                amount: action.payload.amount,
+                data: [...action.payload.posts],
+            };
         default:
             return statePart;
     }
@@ -111,6 +137,34 @@ export const updatePostRequest = (updatedPost, id) => {
             let res = await axios.post(`${API_URL}/posts/${id}/edit`, updatedPost);
             await new Promise((resolve, reject) => setTimeout(resolve, 2000));
             dispatch(endRequest());
+        } catch(e) {
+            dispatch(errorRequest(e.message));
+        }
+    }
+};
+
+// get posts by range
+export const loadPostsByPageRequest = (page, postsPerPage) => {
+    return async dispatch => {
+        dispatch(startRequest());
+
+        try {
+            const startAt = (page-1) * postsPerPage;
+            const limit = postsPerPage;
+
+            let res = await axios.get(`${API_URL}/posts/range/${startAt}/${limit}`);
+            await new Promise((resolve, reject) => setTimeout(resolve, 2000));
+
+            const payload = {
+                posts: res.data.posts,
+                amount: res.data.amount,
+                postsPerPage,
+                presentPage: page
+            };
+
+            dispatch(loadPostsByPage(payload));
+            dispatch(endRequest());
+
         } catch(e) {
             dispatch(errorRequest(e.message));
         }
