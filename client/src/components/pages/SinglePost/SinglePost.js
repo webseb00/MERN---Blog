@@ -18,7 +18,7 @@ class SinglePost extends React.Component {
         request.success = null;
     }
 
-    checkData() {
+    checkData = () => {
         const { singlePost, request } = this.props;
 
         if ((request.pending === false) &&
@@ -38,9 +38,11 @@ class SinglePost extends React.Component {
     }
     
     render() {      
+        const { checkData } = this;
+
         return (
             <div>
-                { this.checkData() }
+                { checkData() }
             </div>
         )
     }

@@ -6,9 +6,16 @@ import Alert from '../../common/Alert/Alert';
 import Pagination from '../../common/Pagination/Pagination';
 
 class Posts extends React.Component {
+
+    state = {
+        postsPerPage: this.props.postsPerPage,
+        pagination: this.props.pagination
+    }
     
     componentDidMount() {
-        const { loadPostsByPage, initialPage, postsPerPage } = this.props;
+        const { loadPostsByPage, initialPage } = this.props;
+        const { postsPerPage } = this.state;
+
         loadPostsByPage(initialPage, postsPerPage);
     }
 
@@ -18,13 +25,16 @@ class Posts extends React.Component {
     }
 
     loadPostsPage = (page) => {
-        const { loadPostsByPage, postsPerPage } = this.props;
+        const { loadPostsByPage } = this.props;
+        const { postsPerPage } = this.state;
+
         loadPostsByPage(page, postsPerPage);
     }
 
     checkData() {
-        const { posts, request, pages, initialPage, presentPage, pagination } = this.props;
-        const { loadPostsPage } = this;     
+        const { posts, request, pages, initialPage, presentPage } = this.props;
+        const { pagination } = this.state;
+        const { loadPostsPage } = this;   
 
         if ((request.pending === false) && 
             (request.success === true) && 
@@ -82,9 +92,12 @@ Posts.propTypes = {
       })
     ),
     loadPostsByPage: PropTypes.func.isRequired,
-    postsPerPage: PropTypes.number.isRequired,
-    initialPage: PropTypes.number.isRequired,
-    pagination: PropTypes.bool.isRequired
+    initialPage: PropTypes.number.isRequired
 };
+
+Posts.defaultProps = {
+    postsPerPage: 2,
+    pagination: true
+}
 
 export default Posts;

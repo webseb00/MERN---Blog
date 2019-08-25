@@ -36,11 +36,7 @@ export const getPages = ({ posts }) => Math.ceil(posts.amount / posts.postsPerPa
 
 export const getInitialPage = ({ posts }) => posts.initialPage;
 
-export const getPostsPerPage = ({ posts }) => posts.postsPerPage;
-
 export const getPresentPage = ({ posts }) => posts.presentPage;
-
-export const getPagination = ({ posts }) => posts.pagination;
 
 const initialState = {
     data: [],
@@ -51,10 +47,8 @@ const initialState = {
     },
     singlePost: {},
     amount: 0,
-    postsPerPage: 2,
     presentPage: null,
-    initialPage: 1,
-    pagination: true
+    initialPage: 1
 };
 
 export default function reducer(statePart = initialState, action = {}) {

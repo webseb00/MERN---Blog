@@ -5,8 +5,6 @@ import {
   loadPostsByPageRequest, 
   getPages, 
   getInitialPage, 
-  getPostsPerPage, 
-  getPagination,
   getPresentPage } from '../../../redux/postsRedux';
 import Posts from './Posts';
 
@@ -15,8 +13,6 @@ const mapStateToProps = state => ({
   request: getRequest(state),
   pages: getPages(state),
   initialPage: getInitialPage(state),
-  postsPerPage: getPostsPerPage(state),
-  pagination: getPagination(state),
   presentPage: getPresentPage(state)
 });
 

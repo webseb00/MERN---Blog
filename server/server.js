@@ -5,9 +5,11 @@ const postRoutes = require('./routes/post.routes');
 const mongoose = require('mongoose');
 const loadTestData = require('./testData');
 const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
 
 const app = express();
 
+app.use(mongoSanitize());
 app.use(helmet());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
