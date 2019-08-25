@@ -28,7 +28,7 @@ class App extends React.Component {
         return (
             <MainLayout>
                 <Switch>
-                    <Route path='/home' exact component={Home} />
+                    <Route path='/' exact component={Home} />
                     <Route path='/posts' exact component={Posts} />
                     <Route path='/posts/new' exact component={AddPostPage} />
                     <Route path='/posts/:id' exact component={SinglePostPage} />  
