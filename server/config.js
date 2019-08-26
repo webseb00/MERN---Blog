@@ -5,6 +5,6 @@ module.exports = {
 // database port
 
 module.exports = {
-    PORT: 8000,
-    DB: 'mongodb+srv://web_seb00:somePassword@cluster0-4xfsm.mongodb.net/test?retryWrites=true&w=majority',
+    PORT: process.env.PORT,
+    DB: process.env.DB,
 };
