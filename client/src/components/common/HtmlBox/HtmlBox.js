@@ -4,7 +4,7 @@ import ReactHtmlParser from 'react-html-parser';
 
 const HtmlBox = ({ children, ...otherProps }) => (
     <p {...otherProps} className="html-box">
-        {children}
+        {ReactHtmlParser(children)}
     </p>
 );
 

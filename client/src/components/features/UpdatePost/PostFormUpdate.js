@@ -95,6 +95,7 @@ class PostFormUpdate extends React.Component {
                 <SectionTitle>Edit Post Content</SectionTitle>
 
                 <Editor
+                    //tag="pre"
                     className="content-editor"
                     text={post.content}
                     onChange={handleEditor}
