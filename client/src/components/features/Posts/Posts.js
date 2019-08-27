@@ -62,7 +62,7 @@ class Posts extends React.Component {
             (request.pending === true) && 
             (request.error !== null)) 
         {
-           return <Alert variant="error"></Alert>;
+           return <Alert variant="error">Error. Posts not found ;-(</Alert>;
         } else if (
             (request.pending === false) && 
             (request.success === true) && 
