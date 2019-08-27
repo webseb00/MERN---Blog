@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import MainLayout from './components/layout/MainLayout/MainLayout';
-
+import { API_URL, BASE_URL } from './config';
 import Home from './components/pages/Home/HomePage';
 import Posts from './components/pages/Posts/PostsPage';
 import Contact from './components/pages/Contact/ContactPage';
@@ -14,14 +14,6 @@ import RandomPostPage from './components/pages/RandomPost/RandomPostPage';
 class App extends React.Component {
     state = {
         posts: []
-    }
-
-    componentDidMount() {
-        fetch('http://localhost:8000/api/posts')
-            .then(res => res.json())
-            .then(res => {
-                this.setState({ posts: res });
-            });
     }
 
     render() {
