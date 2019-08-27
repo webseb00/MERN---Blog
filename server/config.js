@@ -1,5 +1,5 @@
 module.exports = {
-    PORT: 8000,
+    PORT: process.env.PORT,
 };
 
 // database port
