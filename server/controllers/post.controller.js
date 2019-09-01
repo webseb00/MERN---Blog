@@ -59,7 +59,7 @@ exports.updatePost = async (req, res) => {
 }
 
 // get posts by range
-exports.getPostsByRange = async function (req, res) {
+exports.getPostsByRange = async (req, res) => {
 
     try {
         let { startAt, limit } = req.params;
@@ -77,5 +77,4 @@ exports.getPostsByRange = async function (req, res) {
     } catch(err) {
         res.status(500).json(err);
     }
-    
 }

@@ -23,20 +23,15 @@ export const getSinglePost = payload => ({ payload, type: GET_SINGLE_POST });
 export const LOAD_POSTS_PAGE = createActionName('LOAD_POSTS_PAGE');
 export const loadPostsByPage = payload => ({ payload, type: LOAD_POSTS_PAGE });
 
-// get posts
+// selectors
 export const getPosts = ({ posts }) => posts.data;
-// get number of all posts
 export const getPostsNumber = ({ posts }) => posts.data.length;
-
 export const getRequest = ({ posts }) => posts.request;
-
 export const getPost = ({ posts }) => posts.singlePost; 
-
 export const getPages = ({ posts }) => Math.ceil(posts.amount / posts.postsPerPage);
-
 export const getInitialPage = ({ posts }) => posts.initialPage;
-
 export const getPresentPage = ({ posts }) => posts.presentPage;
+
 
 const initialState = {
     data: [],
@@ -159,3 +154,4 @@ export const loadPostsByPageRequest = (page, postsPerPage) => {
         }
     }
 };
+

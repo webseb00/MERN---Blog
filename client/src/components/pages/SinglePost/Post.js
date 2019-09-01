@@ -2,6 +2,7 @@ import React from 'react';
 import HtmlBox from '../../common/HtmlBox/HtmlBox';
 import '../../common/Button/Button.scss';
 import PageTitle from '../../common/PageTitle/PageTitle';
+import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 import { FacebookProvider, Comments, ShareButton } from 'react-facebook';
 import { withRouter } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
